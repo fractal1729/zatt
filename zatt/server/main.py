@@ -8,7 +8,7 @@ from zatt.server.logger import start_logger
 def setup(config={}):
     """Setup a node."""
     config = Config(config=config)
-    start_logger()
+    start_logger("log.txt")
     logger = logging.getLogger(__name__)
 
     loop = asyncio.get_event_loop()
