@@ -11,4 +11,4 @@ def regularBlocks(blockSize, blockInterval, numBlocks): # blockSize units are 50
 		for j in range(blockSize):
 			prefix = ('%04d'%j).encode("utf8")
 			d['block'+('%04d'%j)] = preprefix+prefix+blockunit
-		sleep((float)blockInterval/1000.0)
+		sleep(float(blockInterval)/1000.0)
