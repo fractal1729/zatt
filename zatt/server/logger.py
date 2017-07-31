@@ -28,7 +28,7 @@ def start_logger(log_path):
                         'formatter': 'prod',
                         'level': 'INFO'},
             'file': {
-                        'level': 'DEBUG',
+                        'level': 'INFO',
                         'class': 'logging.handlers.RotatingFileHandler',
                         'formatter': 'prod',
                         'filename': log_path,
@@ -37,7 +37,7 @@ def start_logger(log_path):
             },
         'loggers': {
             '': {'handlers': ['console', 'file'],
-                 'level': 'DEBUG',
+                 'level': 'INFO',
                  'propagate': True,
                  'extra': {'server_id': 1}}
             }

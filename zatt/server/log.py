@@ -121,18 +121,18 @@ class LogManager:
     def append_entries(self, entries, prevLogIndex):
         self.log.append_entries(entries, prevLogIndex - self.compacted.index)
         if entries:
-            logger.debug('Appending. New log: %s', self.log.data)
+            logger.info('Appending. New log: %s', self.log.data)
 
     def commit(self, leaderCommit):
         if leaderCommit <= self.commitIndex:
             return
 
         self.commitIndex = min(leaderCommit, self.index)  # no overshoots
-        logger.debug('Advancing commit to %s', self.commitIndex)
+        logger.info('Advancing commit to %s', self.commitIndex)
         # above is the actual commit operation, just incrementing the counter!
         # the state machine application could be asynchronous
         self.state_machine.apply(self, self.commitIndex)
-        logger.debug('State machine: %s', self.state_machine.data)
+        logger.info('State machine: %s', self.state_machine.data)
         self.compaction_timer_touch()
 
     def compact(self):
