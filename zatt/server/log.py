@@ -121,9 +121,9 @@ class LogManager:
 
     def append_entries(self, entries, prevLogIndex):
         self.log.append_entries(entries, prevLogIndex - self.compacted.index)
-        if entries:
+        #if entries:
             #logger.info(re.sub(r'\*{3,}', "BLOCKCONTENT", ('Appending. New log: %s', self.log.data)))
-            logger.info('Appending. New log: %s', self.log.data)
+            #logger.info('Appending. New log: %s', self.log.data)
 
     def commit(self, leaderCommit):
         if leaderCommit <= self.commitIndex:
