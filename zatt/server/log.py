@@ -122,7 +122,8 @@ class LogManager:
     def append_entries(self, entries, prevLogIndex):
         self.log.append_entries(entries, prevLogIndex - self.compacted.index)
         if entries:
-            logger.info(re.sub(r'\*{3,}', "BLOCKCONTENT", ('Appending. New log: %s', self.log.data)))
+            #logger.info(re.sub(r'\*{3,}', "BLOCKCONTENT", ('Appending. New log: %s', self.log.data)))
+            logger.info('Appending. New log: %s', self.log.data)
 
     def commit(self, leaderCommit):
         if leaderCommit <= self.commitIndex:
@@ -133,7 +134,8 @@ class LogManager:
         # above is the actual commit operation, just incrementing the counter!
         # the state machine application could be asynchronous
         self.state_machine.apply(self, self.commitIndex)
-        logger.info(re.sub(r'\*{3,}', "BLOCKCONTENT", ('State machine: %s', self.state_machine.data)))
+        #logger.info(re.sub(r'\*{3,}', "BLOCKCONTENT", ('State machine: %s', self.state_machine.data)))
+        logger.info('State machine: %s', self.state_machine.data)
         self.compaction_timer_touch()
 
     def compact(self):
