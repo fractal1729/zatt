@@ -9,7 +9,7 @@ def setup(config={}):
     """Setup a node."""
     config = Config(config=config)
     print(config.address)
-    start_logger("log"+config.address+".txt")
+    start_logger("log"+config.address[1]+".txt")
     logger = logging.getLogger(__name__)
 
     loop = asyncio.get_event_loop()
