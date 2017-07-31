@@ -5,6 +5,7 @@ import asyncio
 import logging
 from .config import config
 from zatt.server import utils
+import re
 
 logger = logging.getLogger(__name__)
 
@@ -121,7 +122,7 @@ class LogManager:
     def append_entries(self, entries, prevLogIndex):
         self.log.append_entries(entries, prevLogIndex - self.compacted.index)
         if entries:
-            logger.info('Appending. New log: %s', self.log.data)
+            logger.info('Appending. New log: %s', re.sub(r'\*{3,}', "BLOCKCONTENT", self.log.data))
 
     def commit(self, leaderCommit):
         if leaderCommit <= self.commitIndex:
@@ -132,7 +133,7 @@ class LogManager:
         # above is the actual commit operation, just incrementing the counter!
         # the state machine application could be asynchronous
         self.state_machine.apply(self, self.commitIndex)
-        logger.info('State machine: %s', self.state_machine.data)
+        logger.info('State machine: %s', re.sub(r'\*{3,}', "BLOCKCONTENT", self.state_machine.data))
         self.compaction_timer_touch()
 
     def compact(self):
