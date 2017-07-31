@@ -8,6 +8,7 @@ from zatt.server.logger import start_logger
 def setup(config={}):
     """Setup a node."""
     config = Config(config=config)
+    print(config.address)
     start_logger("log"+config.address+".txt")
     logger = logging.getLogger(__name__)
 
